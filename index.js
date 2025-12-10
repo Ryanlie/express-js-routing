@@ -11,17 +11,18 @@ app.get('/', (req, res) => {
 app.get('/tipe/', async (req, res) => {
   const qs = req.query["size"]
 
+  var query
   if (qs) {
     const size = Number.parseInt(qs)
     if (size >= 1) {
       // No. 3
-      const query = "SELECT * FROM TipeRuangan WHERE kapasitas > " + size + ";"
+      query = "SELECT * FROM TipeRuangan WHERE kapasitas > " + size + ";"
     } else {
       res.status(400).send("query `size` must be a positive integer")
     }
   } else {
     // No. 1
-    const query = "SELECT * FROM TipeRuangan;"
+    query = "SELECT * FROM TipeRuangan;"
   }
 
   res.send(await sendQuery(query))
